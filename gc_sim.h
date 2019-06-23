@@ -12,6 +12,7 @@
 #define G (1024 * M)
 #define T (1024L * G)
 
+/* Device Configuration */
 #define PAGESIZE (8*K) 
 
 #define PAGE_PER_BLOCK 256
@@ -42,17 +43,13 @@ struct gc_sim_env {
 	int bt;
 	int cycs;
 	int range;
+
+	bool *itable;
+	int *mtable;
 };
 
 struct gc_sim_stat {
 
 };
-
-/* Functions */
-int gc_sim_create();
-int gc_sim_destroy();
-int gc_sim_simulate();
-int gc_sim_write(int);
-int gc_sim_print_stat();
 
 #endif

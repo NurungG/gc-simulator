@@ -1,5 +1,8 @@
 simulator
 
+# Swap files
+*.swp
+
 # Prerequisites
 *.d
 
