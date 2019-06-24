@@ -5,8 +5,6 @@
 #ifndef __GC_SIM_H__
 #define __GC_SIM_H__
 
-#include <stdbool.h>
-
 #define K (1024)
 #define M (1024 * K)
 #define G (1024 * M)
@@ -17,6 +15,7 @@
 
 #define PAGE_PER_BLOCK 256
 #define BLOCK_PER_SUPERBLOCK 4
+#define PAGE_PER_SUPERBLOCK (PAGE_PER_BLOCK * BLOCK_PER_SUPERBLOCK)
 
 #define DEVICE_CAPACITY (256L*G)
 #define NR_PAGES (DEVICE_CAPACITY/PAGESIZE)
@@ -34,22 +33,24 @@
 struct gc_sim_ops {
 	int (*create) ();
 	int (*destroy) ();
-	int (*simulate) ();
 	int (*write) (int);
-	int (*print_stat) ();
 };
 
 struct gc_sim_env {
-	int bt;
-	int cycs;
+	int bench_type;
+	int cycles;
 	int range;
-
-	bool *itable;
-	int *mtable;
 };
 
 struct gc_sim_stat {
-
+	int writes;
+	int valid_copies;
+	int gc_cnt;
 };
+
+int gc_sim_bench_config(int, int, struct gc_sim_env *);
+void gc_sim_print_stat(struct gc_sim_stat *);
+void gc_sim_device_info(struct gc_sim_env *);
+int gc_sim_simulate(struct gc_sim_ops *, struct gc_sim_env *);
 
 #endif

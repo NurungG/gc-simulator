@@ -60,3 +60,4 @@ int bloom_write(int lpa) {
 int bloom_print_stat() {
 	puts("hello, it's bloom print stat");
 }
+
