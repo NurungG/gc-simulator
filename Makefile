@@ -4,6 +4,7 @@ OBJ_DIR=./obj
 
 CFLAGS=\
 	-g \
+	-O2 \
 	-Wall \
 	-D$(TARGET_FTL) \
 	-fsanitize=address \

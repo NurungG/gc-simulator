@@ -10,7 +10,7 @@ extern struct gc_sim_env env;
 extern struct gc_sim_stat stat;
 
 int main() {
-	gc_sim_bench_config(RAND_WRITE, 1, &env);
+	gc_sim_bench_config(RAND_WRITE, 1000, &env);
 
 	gc_sim_device_info(&env);
 	gc_sim_simulate(&ops, &env);

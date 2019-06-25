@@ -5,24 +5,27 @@
 #ifndef __GC_SIM_H__
 #define __GC_SIM_H__
 
+#include <stdint.h>
+
 #define K (1024)
 #define M (1024 * K)
 #define G (1024 * M)
 #define T (1024L * G)
 
 /* Device Configuration */
-#define PAGESIZE (8*K) 
-
-#define PAGE_PER_BLOCK 256
-#define BLOCK_PER_SUPERBLOCK 4
-#define PAGE_PER_SUPERBLOCK (PAGE_PER_BLOCK * BLOCK_PER_SUPERBLOCK)
+#define PAGESIZE (4*K) 
 
 #define DEVICE_CAPACITY (256L*G)
 #define NR_PAGES (DEVICE_CAPACITY/PAGESIZE)
 #define NR_BLOCKS (NR_PAGES/PAGE_PER_BLOCK)
 #define NR_SUPERBLOCKS (NR_BLOCKS/BLOCK_PER_SUPERBLOCK)
 
-#define OP_FACTOR 0.25
+#define PAGE_PER_BLOCK 256
+//#define BLOCK_PER_SUPERBLOCK NR_BLOCKS
+#define BLOCK_PER_SUPERBLOCK 4
+#define PAGE_PER_SUPERBLOCK (PAGE_PER_BLOCK * BLOCK_PER_SUPERBLOCK)
+
+#define OP_FACTOR 0.07
 #define RANGE (NR_PAGES*(1-OP_FACTOR))
 
 /* Bench Types */
@@ -43,9 +46,9 @@ struct gc_sim_env {
 };
 
 struct gc_sim_stat {
-	int writes;
-	int valid_copies;
-	int gc_cnt;
+	uint64_t writes;
+	uint64_t valid_copies;
+	uint64_t gc_cnt;
 };
 
 int gc_sim_bench_config(int, int, struct gc_sim_env *);

@@ -8,17 +8,17 @@
 #include <stdbool.h>
 
 /* Structures */
-struct bloom_member {
-	bool *itable;
-	int *mtable;
-	int *oob;
+struct blm_member {
+	bool *itable;	// Invalid Table
+	int *mtable;	// Mapping Table
+	int *oob;	// Out-Of-Band area
 
 	int *ppa_in_sb;
 };
 
 /* Functions */
-int bloom_create();
-int bloom_destroy();
-int bloom_write(int);
+int blm_create();
+int blm_destroy();
+int blm_write(int);
 
 #endif

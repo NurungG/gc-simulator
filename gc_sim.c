@@ -24,6 +24,7 @@ void gc_sim_device_info(struct gc_sim_env *env) {
 	printf("nr_superblocks: %ld\n", NR_SUPERBLOCKS);
 	puts("");
 	printf("Over-Provisioning Factor: %.2f\n", OP_FACTOR);
+	printf("Range: %d\n", (int)RANGE);
 	puts("");
 
 	puts("[Bench Configuration]");
@@ -41,9 +42,9 @@ void gc_sim_print_stat(struct gc_sim_stat *stat) {
 
 	puts("");
 
-	printf("Write: %d\n", stat->writes);
-	printf("Valid Copy: %d\n", stat->valid_copies);
-	printf("GC: %d\n", stat->gc_cnt);
+	printf("Write: %ld\n", stat->writes);
+	printf("Valid Copy: %ld\n", stat->valid_copies);
+	printf("GC: %ld\n", stat->gc_cnt);
 
 	puts("");
 
@@ -60,7 +61,8 @@ static void progress_bar(int current, int total) {
 		for (int i = 0; i < current / (total/bar_width)-1; i++) printf("=");
 		if (current/bar_width != total/bar_width) printf(">");
 		for (int i = current / (total/bar_width); i < bar_width-1; i++) printf(" ");
-		printf("]\n");
+		printf("]");
+		fflush(stdout);
 	}
 }
 
